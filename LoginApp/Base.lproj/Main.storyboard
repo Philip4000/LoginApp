@@ -42,13 +42,13 @@
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="yIc-2T-DhG">
                                         <rect key="frame" x="0.0" y="0.0" width="314" height="52"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" textContentType="username"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="AH3-qE-SbY">
                                         <rect key="frame" x="0.0" y="68" width="314" height="52"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
                                     </textField>
@@ -67,6 +67,7 @@
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="LOGIN"/>
                                 <connections>
+                                    <action selector="loginButtonPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="Cx1-uT-J1C"/>
                                     <segue destination="f8D-M4-iOl" kind="presentation" id="pqE-Bm-Gq9"/>
                                 </connections>
                             </button>
@@ -77,11 +78,17 @@
                                         <rect key="frame" x="0.0" y="0.0" width="187" height="34"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Forget Username?"/>
+                                        <connections>
+                                            <action selector="forgetButtonsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9AG-Sx-AsO"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ejh-f3-Rjc">
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ejh-f3-Rjc">
                                         <rect key="frame" x="195" y="0.0" width="187" height="34"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Forget Password?"/>
+                                        <connections>
+                                            <action selector="forgetButtonsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iB3-MQ-Aya"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -106,15 +113,20 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="f1j-0A-RWX" secondAttribute="trailing" constant="50" id="wGM-0R-FOs"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="loginButton" destination="ZMd-LX-CcU" id="cir-FN-nPO"/>
+                        <outlet property="passwordTF" destination="AH3-qE-SbY" id="Fgh-A8-EGc"/>
+                        <outlet property="usernameTF" destination="yIc-2T-DhG" id="UGn-cU-9gb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="-2.6785714285714284"/>
         </scene>
-        <!--View Controller-->
+        <!--Welcome View Controller-->
         <scene sceneID="OQd-ez-pbw">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="f8D-M4-iOl" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="f8D-M4-iOl" customClass="WelcomeViewController" customModule="LoginApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="R6S-f5-y7y">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -145,6 +157,9 @@
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="22"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="LOGOUT"/>
+                                <connections>
+                                    <segue destination="xaC-4H-lQI" kind="unwind" unwindAction="unwindFor:" id="ge8-ES-Zkt"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4dk-KY-2Pp"/>
@@ -164,8 +179,13 @@
                             <constraint firstItem="4dk-KY-2Pp" firstAttribute="bottom" secondItem="uBA-zT-cbn" secondAttribute="bottom" constant="90" id="tv3-qx-27e"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="greetingLabel" destination="n1e-2Y-TSv" id="mz3-pK-4lO"/>
+                        <outlet property="logoutButton" destination="uBA-zT-cbn" id="Ihs-0g-dkS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Boy-2m-SAE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="xaC-4H-lQI" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="860.86956521739137" y="-3.3482142857142856"/>
         </scene>
