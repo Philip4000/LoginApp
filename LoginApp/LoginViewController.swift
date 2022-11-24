@@ -47,9 +47,9 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func forgetButtonsPressed(_ sender: UIButton) {
-            sender.tag == 0 ?
-            showAlert(with: "OMG 😱", and: "You Username is - \(username)") :
-            showAlert(
+            sender.tag == 0
+        ? showAlert(with: "OMG 😱", and: "You Username is - \(username)")
+        : showAlert(
                 with: "Whaaaat? 🫣",
                 and: "How could you forget the password??? Pss.. You passwors - \(password)"
             )
