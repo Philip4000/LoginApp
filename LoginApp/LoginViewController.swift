@@ -47,16 +47,12 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func forgetButtonsPressed(_ sender: UIButton) {
-        switch sender.tag {
-        case 0:
-            showAlert(with: "OMG 😱", and: "You Username is - \(username)")
-        case 1:
+            sender.tag == 0 ?
+            showAlert(with: "OMG 😱", and: "You Username is - \(username)") :
             showAlert(
                 with: "Whaaaat? 🫣",
                 and: "How could you forget the password??? Pss.. You passwors - \(password)"
             )
-        default: break
-        }
     }
     
     @IBAction func unwind(for segue: UIStoryboardSegue) {
