@@ -15,8 +15,7 @@ class LoginViewController: UIViewController {
     @IBOutlet var loginButton: UIButton!
     
 // MARK: - Private Properties
-    private let username = "Tomas"
-    private let password = "12345"
+    private let user = User.getUser()
 
 // MARK: - Override Methods
     override func viewDidLoad() {
@@ -27,8 +26,18 @@ class LoginViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let welcomeVC = segue.destination as? WelcomeViewController else { return }
-        welcomeVC.username = usernameTF.text
+        guard let tabBarVC = segue.destination as? UITabBarController else { return }
+        guard let viewControllers = tabBarVC.viewControllers else { return }
+        
+        viewControllers.forEach { viewController in
+            if let welcomeVC = viewController as? WelcomeViewController {
+                welcomeVC.user = user
+            } else if let navigationVC = viewController as? UINavigationController {
+                guard let profileVC = navigationVC.topViewController as? ProfileViewController else { return }
+                profileVC.user = user
+            }
+        }
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -38,21 +47,24 @@ class LoginViewController: UIViewController {
     
 // MARK: - IBActions
     @IBAction func loginButtonPressed() {
-        if usernameTF.text != username || passwordTF.text != password {
+        guard usernameTF.text == user.username, passwordTF.text == user.password else {
             showAlert(
                 with: "Somthing wrong!",
                 and: "You made a mistake when entering your username or password"
             )
+            return
         }
+        performSegue(withIdentifier: "showWelcomeVC", sender: nil)
+        
     }
     
     @IBAction func forgetButtonsPressed(_ sender: UIButton) {
-            sender.tag == 0
-        ? showAlert(with: "OMG 😱", and: "You Username is - \(username)")
+        sender.tag == 0
+        ? showAlert(with: "OMG 😱", and: "You Username is - \(user.username)")
         : showAlert(
-                with: "Whaaaat? 🫣",
-                and: "How could you forget the password??? Pss.. You passwors - \(password)"
-            )
+            with: "Whaaaat? 🫣",
+            and: "How could you forget the password??? Pss.. You passwors - \(user.password)"
+        )
     }
     
     @IBAction func unwind(for segue: UIStoryboardSegue) {
